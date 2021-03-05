@@ -43,6 +43,8 @@ function handleSubmit (e) {
     genTodos();
     localStorage.setItem('TODO', JSON.stringify(todoList));
     loadChecked();
+    const checkList = scanChecked();
+    saveChecked(checkList);
 }
 function handleDelete (e) {
     // Remove from the list
@@ -55,13 +57,14 @@ function handleDelete (e) {
     // remove from the local storage
     todoList.splice(idx,1);
     localStorage.setItem('TODO', JSON.stringify(todoList));
+    const checkList = scanChecked();
+    saveChecked(checkList);
 }
 function handleCheck (e) {
     if (e.target.getAttribute('status') === "off") {
         e.target.innerText = '✅';
         e.target.setAttribute('status', 'on');
         e.target.parentNode.querySelector('span').style.textDecoration="line-through";
-
     } else {
         e.target.innerText = '⬜';
         e.target.setAttribute('status', 'off');
