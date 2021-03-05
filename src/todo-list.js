@@ -42,6 +42,7 @@ function handleSubmit (e) {
     todoInput.value = "";
     genTodos();
     localStorage.setItem('TODO', JSON.stringify(todoList));
+    loadChecked();
 }
 function handleDelete (e) {
     // Remove from the list
