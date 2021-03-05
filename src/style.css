@@ -52,11 +52,30 @@ button {
     background-position: center center;
     z-index: -1;
 }
+.clock-block{
+  display:flex;
+  justify-content:space-between;
+  align-content:center;
+  text-shadow: 2px 4px 5px rgba(0,0,0,0.2);
+}
+.before-clock {
+  margin-top:10%;
+  margin-right:.5em;
+  font-size:4em;
+  width:2em;
+}
 .clock {
   margin-top:5%;
   font-size: 10em;
+  width:4em;
   color:white;
-  text-shadow: 2px 4px 5px rgba(0,0,0,0.2);
+}
+.after-clock {
+  margin-top:10%;
+  margin-left:.5em;
+  font-size:4em;
+  width:2em;
+  color:white;
 }
 .user-name {
   margin-bottom:1em;
@@ -117,4 +136,10 @@ button {
 }
 .disappear {
   display: none;
+}
+.visible {
+  visibility: visible;
+}
+.invisible {
+  visibility: hidden;
 }
