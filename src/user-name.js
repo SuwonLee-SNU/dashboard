@@ -38,11 +38,9 @@ function makeResetter () {
         location.href = location.href;
     })
     rst.addEventListener('mouseover',(v)=>{
-        console.log(v.target);
         v.target.style.color="white";
     });
     rst.addEventListener('mouseleave',(v)=>{
-        console.log(v.target);
         v.target.style.color="black";
     });
 }

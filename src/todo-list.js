@@ -3,6 +3,7 @@ const todoForm = todo.querySelector('form');
 const todoInput = todo.querySelector('input');
 let todoList = [];
 
+
 function loadTodos () {
     todoListFromLS = localStorage.getItem('TODO');
     if (todoListFromLS !== null) {
@@ -74,6 +75,31 @@ function handleCheck (e) {
     saveChecked(checkList);
 }
 
+function handleCheckAll (e) {
+    const currentCheckBtns = document.querySelectorAll('.checkBtn');
+    let checkList = [];
+    currentCheckBtns.forEach((v)=>checkList.push(1));
+    saveChecked(checkList);
+    loadTodos();
+    loadChecked();
+}
+
+function handleUncheckAll (e) {
+    const currentCheckBtns = document.querySelectorAll('.checkBtn');
+    let checkList = [];
+    currentCheckBtns.forEach((v)=>checkList.push(0));
+    saveChecked(checkList);
+    loadTodos();
+    loadChecked();
+}
+function handleDeleteAll (e) {
+    localStorage.removeItem('TODO');
+    localStorage.removeItem('checkList');
+    myList = todo.querySelector('ul');
+    myList.innerText = [];
+    todoList = [];
+}
+
 function scanChecked () {
     const currentCheckBtns = document.querySelectorAll('.checkBtn');
     let checkList = [];
@@ -114,6 +140,9 @@ function init () {
     loadTodos();
     loadChecked();
     todoForm.addEventListener('submit',handleSubmit);
+    document.querySelector('.checkAllButton').addEventListener('click',handleCheckAll);
+    document.querySelector('.uncheckAllButton').addEventListener('click',handleUncheckAll);
+    document.querySelector('.deleteAllButton').addEventListener('click',handleDeleteAll);
 }   
 
 init();
