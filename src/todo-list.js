@@ -1,21 +1,21 @@
 const todo = document.querySelector('.todo-list');
 const todoForm = todo.querySelector('form');
 const todoInput = todo.querySelector('input');
-let todoList = [];
-
 
 function loadTodos () {
     todoListFromLS = localStorage.getItem('TODO');
+    let todoList = [];
     if (todoListFromLS !== null) {
         const parsedToDos = JSON.parse(todoListFromLS);
         todoList = parsedToDos;
-        genTodos();
     }
+    return todoList;
 }
-function genTodos () {
+function genTodos (todoList) {
     myList = todo.querySelector('ul');
     myList.innerText = ''; // ← clear the ul element
     let len = [];
+    // Generated ul from current todoList 
     todoList.forEach((v) => {
         const elem = document.createElement('li');
         elem.innerHTML= '<button class="checkBtn" status="off">⬜</button>'
@@ -39,13 +39,18 @@ function genTodos () {
 
 function handleSubmit (e) {
     e.preventDefault();
+    // update todoList
+    const todoList = loadTodos();
     todoList.push(todoInput.value);
-    todoInput.value = "";
-    genTodos();
     localStorage.setItem('TODO', JSON.stringify(todoList));
+    // update ul
+    genTodos(todoList);
+    // update and save checklist
     loadChecked();
     const checkList = scanChecked();
     saveChecked(checkList);
+    // remove text from the input form
+    todoInput.value = "";
 }
 function handleDelete (e) {
     // Remove from the list
@@ -80,7 +85,7 @@ function handleCheckAll (e) {
     let checkList = [];
     currentCheckBtns.forEach((v)=>checkList.push(1));
     saveChecked(checkList);
-    loadTodos();
+    genTodos(loadTodos());
     loadChecked();
 }
 
@@ -89,9 +94,32 @@ function handleUncheckAll (e) {
     let checkList = [];
     currentCheckBtns.forEach((v)=>checkList.push(0));
     saveChecked(checkList);
-    loadTodos();
+    const todoList = loadTodos();
+    genTodos(todoList);
     loadChecked();
 }
+
+function handleDeleteChecked (e) {
+    // get index of checked items
+    const checkList = scanChecked();
+    const todoListFromLS = JSON.parse(localStorage.getItem('TODO'));
+    const checkListFromLS = JSON.parse(localStorage.getItem('checkList'));
+    let todoListNew = [];
+    let checkListNew = [];
+    for (let i=0;i<checkList.length;i++) {
+        if (checkList[i] !== 1) {
+            checkListNew.push(checkListFromLS[i]);
+            todoListNew.push(todoListFromLS[i]);
+        }
+    }
+    // remove item from the local storage
+    localStorage.setItem('TODO', JSON.stringify(todoListNew));
+    localStorage.setItem('checkList', JSON.stringify(checkListNew));
+    // reload ul view
+    genTodos(todoListNew);
+    loadChecked();
+}
+
 function handleDeleteAll (e) {
     localStorage.removeItem('TODO');
     localStorage.removeItem('checkList');
@@ -137,11 +165,12 @@ function init () {
     myList = document.createElement('ul');
     myList.style.listStyle = 'none';
     todo.appendChild(myList);
-    loadTodos();
+    genTodos(loadTodos());
     loadChecked();
     todoForm.addEventListener('submit',handleSubmit);
     document.querySelector('.checkAllButton').addEventListener('click',handleCheckAll);
     document.querySelector('.uncheckAllButton').addEventListener('click',handleUncheckAll);
+    document.querySelector('.deleteCheckedButton').addEventListener('click',handleDeleteChecked);
     document.querySelector('.deleteAllButton').addEventListener('click',handleDeleteAll);
 }   
 
