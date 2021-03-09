@@ -7,6 +7,7 @@ body {
   justify-content: center;
   align-content: center;
   align-items: center;
+  overflow: hidden;
 }
 
 /*Animation*/
@@ -68,22 +69,22 @@ button {
   font-family: monospace;
 }
 .before-clock {
-  margin-top:10%;
-  margin-right:.5em;
-  font-size:4em;
+  margin-top:5%;
+  font-size:3em;
   width:2em;
 }
 .clock {
-  margin-top:5%;
-  font-size: 10em;
+  margin-top:3%;
+  font-size: 6em;
   max-width:5em;
   color:white;
   text-align:center;
+  margin-left:.3em;
+  margin-right:.3em;
 }
 .after-clock {
-  margin-top:10%;
-  margin-left:.5em;
-  font-size:4em;
+  margin-top:5%;
+  font-size:3em;
   width:2em;
   color:white;
 }
