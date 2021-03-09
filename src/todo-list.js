@@ -20,7 +20,7 @@ function genTodos (todoList) {
         const elem = document.createElement('li');
         elem.innerHTML= '<button class="checkBtn" status="off">⬜</button>'
          + `<span>${v}</span>`
-         + '<button class="delBtn">❌</button>';
+         + '<button class="delBtn" style="color:rgba(0,0,0,0.3);">✕</button>';
         myList.appendChild(elem);
         elem.querySelector('.delBtn').addEventListener('click', handleDelete);
         elem.querySelector('.checkBtn').addEventListener('click', handleCheck);
@@ -61,10 +61,13 @@ function handleDelete (e) {
     const ul = todo.querySelector('ul');
     ul.removeChild(e.target.parentNode);
     // remove from the local storage
+    const todoList = loadTodos();
     todoList.splice(idx,1);
     localStorage.setItem('TODO', JSON.stringify(todoList));
     const checkList = scanChecked();
     saveChecked(checkList);
+    genTodos(todoList);
+    loadChecked();
 }
 function handleCheck (e) {
     if (e.target.getAttribute('status') === "off") {

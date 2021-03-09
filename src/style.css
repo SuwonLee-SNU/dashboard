@@ -111,9 +111,10 @@ button {
   text-shadow: 2px 4px 5px rgba(0,0,0,1);
   margin-left:-2em;
   min-height: 1.5em;
-  max-height: 5em;
+  max-height: 10em;
   display: flex;
   align-content:center;
+  align-items: center;
 }
 .todo-list span {
   display:inline-block;
