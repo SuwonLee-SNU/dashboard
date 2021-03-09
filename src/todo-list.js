@@ -18,9 +18,9 @@ function genTodos (todoList) {
     // Generated ul from current todoList 
     todoList.forEach((v) => {
         const elem = document.createElement('li');
-        elem.innerHTML= '<button class="checkBtn" status="off">⬜</button>'
+        elem.innerHTML= '<button class="checkBtn" status="off")>⬜</button>'
          + `<span>${v}</span>`
-         + '<button class="delBtn" style="color:rgba(0,0,0,0.3);">✕</button>';
+         + '<button class="delBtn">✕</button>';
         myList.appendChild(elem);
         elem.querySelector('.delBtn').addEventListener('click', handleDelete);
         elem.querySelector('.checkBtn').addEventListener('click', handleCheck);
