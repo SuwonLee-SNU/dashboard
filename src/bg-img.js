@@ -11,12 +11,17 @@ const imgUrlList__remote = [
 
 const imgUrlList__local = [
     './images/scenery1.jpg',
-    './images/symmetry1.jpg'
+    './images/symmetry1.jpg',
+    './images/symmetry2.jpg',
+    './images/symmetry3.jpg',
+    './images/symmetry4.jpg',
+    './images/symmetry5.jpg',
 ]
 
 function setBackgroundImage (imgUrlList) {
     let i = Math.ceil(Math.random()*imgUrlList.length-1)  ;
     bg.style.backgroundImage = `url(${imgUrlList[i]})`;
+    bg.style.opacity = 0.6;
 }
 
 function init () {
